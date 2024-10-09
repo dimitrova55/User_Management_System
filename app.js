@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import expressEjsLayouts from "express-ejs-layouts";
 import flash from "express-flash";
 import session from "express-session";
+import methodOverride from "method-override";
 
 import customerRouter from './server/routes/customer.js'
 import connectDB from './server/config/db.js'; // Import the DB connection
@@ -18,6 +19,8 @@ const port = 3000 || process.env.PORT;
 
 app.use(express.urlencoded({extended: true}));  // = app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
+app.use(methodOverride('_method')); // NB! to update info through a form and send the updated info with PUT method
+
 
 // Static files
 app.use(express.static("public"));
